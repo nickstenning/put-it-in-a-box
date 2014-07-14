@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Data Packages: put it in a box</title>
+
+    <meta name="description" content="A short presentation for csv,conf about Data Packages and the importance of containerisation">
+    <meta name="author" content="Nick Stenning">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="node_modules/reveal.js/css/reveal.min.css">
+    <link rel="stylesheet" href="theme.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="node_modules/reveal.js/lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'node_modules/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="node_modules/reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h2>Data Packages: <br>put it in a box</h2>
+          <p>
+            <br>
+            A brief history of container shipping and <br>
+            an introduction to the
+            <a href="http://dataprotocols.org/data-packages/">Data Package</a>.
+          </p>
+          <p>
+            <br>
+            <a href="https://whiteink.com">Nick Stenning</a>
+            (<a href="https://twitter.com/nickstenning">@nickstenning</a>).
+          </p>
+        </section>
+
+        <section>
+          <img src="img/break-bulk-bananas.jpg">
+        </section>
+
+        <section>
+          <img src="img/break-bulk-sacks.png">
+        </section>
+
+        <section>
+          <img src="img/container-ship.jpg">
+        </section>
+
+        <section>
+          <img src="img/containers.jpg">
+        </section>
+
+        <section>
+          <h3 style="opacity: 0.5">We are living in the era of</h3>
+          <h2>Break-bulk data</h2>
+        </section>
+
+        <section>
+          <h2>The impact of containerisation</h2>
+
+          <br>
+          <pre><code data-trim>
+year,  vessel,             loadingCostPerTon
+1956,  SS Ideal-X,         0.16
+1956,  medium break-bulk,  5.86
+          </code></pre>
+          <!-- The Box: how the shipping container made the world smaller and
+               the world economy bigger, Marc Levinson, 2006 -->
+
+          <br>
+          <pre><code data-trim>
+year,  tonsPerManHour,     hoursInPort
+1959,  0.627,              504
+1976,  4234,               18
+          </code></pre>
+          <!-- Estimating the effects of containerization on world trade,
+               Bernhofen, El-Sahli, Kneller
+               https://www.nottingham.ac.uk/gep/documents/conferences/2011/korea-conf-november/daniel-bernhofen.pdf -->
+        </section>
+
+        <section>
+          <img src="img/govweb.png">
+        </section>
+
+        <section>
+          <ol style="font-size: 200%; line-height: 200%">
+            <li>Simplicity</li>
+            <li class="fragment">Opacity</li>
+            <li class="fragment">Moderated diversity</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>The Data Package</h2>
+        </section>
+
+        <section>
+          <p>datapackage.json</p>
+          <pre><code class="json" data-trim>
+{
+  "name": "gold-prices"
+}
+          </code></pre>
+        </section>
+        </section>
+
+        <section>
+          <img src="img/empty.jpg">
+        </section>
+
+        <section>
+          <p>datapackage.json</p>
+          <pre><code class="json" data-trim>
+{
+  "name": "gold-prices",
+  "title": "Gold Prices (Monthly in USD)",
+  "license": "odc-pddl",
+  "sources": [{
+    "name": "Bundesbank statistics",
+    "web": "http://www.bundesbank.de/Navigation/[...]"
+  }],
+  "resources": [{
+    "path": "data.csv",
+    "format": "csv",
+    "schema": {
+      "fields": [
+        {"type": "date", "name": "date"},
+        {"type": "number", "name": "price"}
+      ]
+    }
+  }],
+  "version": "1.0.42"
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <p>datapackage.json</p>
+          <pre style="width: auto"><code class="json" data-trim>
+{
+  "name": "gold-prices",                   # Identifier ([a-z0-9._-]+)
+  "title": "Gold Prices (Monthly in USD)", # One-sentence description
+  "license": "odc-pddl",                   # Open License identifier
+  "sources": [...],                        # Array of sources (defined)
+  "resources": [...],                      # Array of resources (part-defined)
+  "version": "1.0.42"                      # Semver-compatible version
+}
+          </code></pre>
+          <div class="fragment">
+            <p>data.csv</p>
+            <pre><code class="csv" data-trim>
+date,price
+1950-01-01,34.730
+1950-02-01,34.730
+...
+            </code></pre>
+          </div>
+        </section>
+
+        <section>
+          <h2>Data Package</h2>
+          <h2 style="opacity: 0.5">↑</h2>
+          <h2>Tabular Data Package</h2>
+        </section>
+
+        <section>
+          <img src="img/palletwide.jpg">
+        </section>
+
+        <section>
+          <h2>Tabular Data Package</h2>
+          <br>
+          <br>
+          <ul style="font-size: 150%; line-height: 150%;">
+            <li>&ge;1 data file <span style="opacity: 0.5">(AKA "resource")</span></li>
+            <li>resource format == CSV</li>
+            <li>resource schema <span style="opacity: 0.5">(JSON Table Schema)</span></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Tools</h2>
+          <ul>
+            <li>Low-level handling tools
+              <ul>
+                <li><a href="https://github.com/okfn/dpm">Data Package Manager</a></li>
+                <li>
+                  <a href="https://github.com/tryggvib/datapackage">Python</a>
+                  /
+                  <a href="https://github.com/QBRC/RODProt">R</a>
+                  /
+                  <a href="https://github.com/theodi/datapackage.rb">Ruby</a>
+                  libraries
+                </li>
+              </ul>
+            </li>
+            <li>High-level authoring and management tools
+
+              <ul>
+                <li><a href="http://datapackager.okfn.org">Data Packager</a></li>
+                <li><a href="http://csvlint.io/">CSVLint</a></li>
+                <li><a href="http://git-viewer.labs.theodi.org/">Git Data Package viewer</a></li>
+                <li><a href="https://github.com/centraldedados/datacentral">Datacentral</a>, the "poor man's CKAN"</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3><a href="http://dataprotocols.org/">http://dataprotocols.org/</a></h3>
+          <img src="img/dataprotocols.jpg">
+        </section>
+
+        <section>
+          <h3><a href="https://github.com/datasets/">https://github.com/datasets/</a></h3>
+          <img src="img/datasets.jpg">
+        </section>
+
+        <section>
+          <h1>Just put it in a box already.</h1>
+        </section>
+
+        <section>
+          <img src="img/not-for-everyone.png">
+        </section>
+
+        <section>
+          <h4>Image credits</h4>
+          <ul style="font-size: 70%">
+            <li>Workers carrying bananas: National Archives and Records Administration (NAI: 518791) on <a href="https://commons.wikimedia.org/wiki/File:New_York,_New_York_-_Longshoremen._This_shows_the_prevailing_method_of_transferring_bananas_from_the_end_on_the..._-_NARA_-_518791.tif">Wikimedia Commons</a></li>
+            <li>Dockers, when loading bagged cargo: CC BY-SA by <a href="https://commons.wikimedia.org/wiki/User:Buonasera">Buonasera</a> on <a href="https://commons.wikimedia.org/wiki/File:Hafenarbeiter_bei_der_Verladung_von_Sackgut_-_MS_Rothenstein_NDL,_Port_Sudan_1960.png">Wikimedia Commons</a></li>
+            <li>Van carrier waiting for a container at HHLA Container Terminal: CC BY-SA by <a href="https://commons.wikimedia.org/wiki/User:Derlorenz68">Derlorenz68</a> on <a href="https://commons.wikimedia.org/wiki/File:Hamburg_harbour_Burchardkai_Van_Carrier_dec_2013.JPG">Wikimedia Commons</a></li>
+            <li>Container terminal from the air: CC BY-SA by <a href="https://commons.wikimedia.org/wiki/User:Jean11">Thomas Fries</a> on <a href="https://commons.wikimedia.org/wiki/File:Projekt_Hei%C3%9Fluftballon-IMG-1319.jpg">Wikimedia Commons</a></li>
+            <li>Empty shipping container: CC BY-NC-ND by <a href="https://secure.flickr.com/photos/jamesgood/">James Good</a> on <a href="https://secure.flickr.com/photos/jamesgood/1708602693/">Flickr</a></li>
+            <li><i>Copyright-holders for remaining images could not be identified. Please contact the author to address any concerns around image rights.</i></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <script src="node_modules/reveal.js/lib/js/head.min.js"></script>
+    <script src="node_modules/reveal.js/js/reveal.min.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'fade',
+
+        // multiplex: {
+        //   secret: '1234',
+        //   id: 'abcd',
+        //   url: 'revealjs.jit.su:80'
+        // },
+
+        dependencies: [
+          { src: 'node_modules/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: '//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.10/socket.io.min.js', async: true }
+          // { src: 'node_modules/reveal.js/plugin/multiplex/master.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>

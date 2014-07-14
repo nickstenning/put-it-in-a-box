@@ -1,0 +1,14 @@
+{
+  "name": "data-packages",
+  "version": "0.0.0",
+  "description": "A presentation for csv,conf on data packages and the importance of containerisation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nick Stenning",
+  "license": "MIT",
+  "dependencies": {
+    "reveal.js": "^2.6.0"
+  }
+}
