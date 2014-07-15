@@ -1,0 +1,13 @@
+Data Packages: put it in a box
+==============================
+
+A talk given at csv,conf 2014, at the Kalkscheune, in Berlin.
+
+To read the talk:
+
+    git clone https://github.com/nickstenning/put-it-in-a-box/
+    cd put-it-in-a-box
+    npm install
+    open index.html
+
+A (rough) transcript is included in talk.md.
